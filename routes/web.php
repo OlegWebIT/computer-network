@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', 'HomeController@index');
+
+Route::get('/', [HomeController::class, 'index']);
+
+/*Route::get('/', function (Request $request) {
+
+    if ($request->all()["delete"]) {
+
+    }
+    $device = DB::table('device')->get();
+    return view('home')->with('device', $device);
+});*/
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
